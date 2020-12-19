@@ -1,0 +1,19 @@
+{
+  "name": "server_example",
+  "version": "1.0.0",
+  "description": "review about overall node ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeonA1223/node_learning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeonA1223/node_learning/issues"
+  },
+  "homepage": "https://github.com/SeonA1223/node_learning#readme"
+}
