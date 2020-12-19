@@ -2,3 +2,51 @@ package.json
 
 dependencies : 일반적인 배포환경에서 필요한 의존성 모듈 --save
 devDependencies : 개발환경에서 필요한 의존성 모듈 <- --save-dev
+
+
+routing(라우팅) : 사용자가 접속한 URL, Method에 따라 해당 로직 실행하는 것 
+
+express를 사용하기 전에는, URL을 직접 파싱해서 사용했지만 express는 미리 파싱해줌
+
+request(요청객체)
+ex) 
+    localhost:3000/user/3?a=10&b=20
+-params : URL에 포함된 데이터, 3
+-query : 쿼리 스트링, a = '10', b = '20'
+-body : post전달
+
+repond(응답객체)
+클라이언트에게 서버가 응답할 수 있다. 
+download() : 해당 파일 다운로드 
+json() : json형태로 데이터 응답
+redirect() : 해당 경로로 강제이동
+render() : express에서 제공하는 pug, ejs 템플릿 엔진을 html로 렌더링할 때 사용
+send() : 전송된 데이터에 따라 알맞은 형식으로 바뀌어서 전송
+status() : 상태코드로 바꿔줄 때 사용
+
+미들웨어
+app.use() <- 미들웨어 등록부분, 모든 요청에 대해 동작한다.
+app.get,post,put,delete <- 요청 URL, method에 따라 동작하는 미들웨어
+next() : 다음 미들웨어 호출(조심히 사용)
+
+첫번 째 방법
+app.use((req,res,next) => {
+    console.log('첫 번째 미들웨어')
+    next()
+})
+
+두번 째 방법(함수 형태)
+var firstMiddleware = (req, res, next) => {
+        console.log('첫 번째 미들웨어')
+    next()
+}
+app.use(firstMiddleWare)
+
+미들웨어에서 중요한 건 등록한 순서로 미들웨어를 실행한다. 
+다음 미들웨어를 실행하기 위해서는 next()를 호출해야 한다. 
+에러 미들웨어는 특수하게 4개의 인자를 받는다. <- 실행하기 위해서는 next()에 
+첫번째 인자를 넣어서 호출하면 된다.
+
+미들웨어(라우터)에서 중요한점 
+하나의 미들웨어에서 응답이 여러번 등장하면 안된다. 아래와 같은 에러 발생
+Error : Cannot set headers after they are sent to the client
